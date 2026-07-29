@@ -1,49 +1,57 @@
+import SiteHeader from "./SiteHeader";
+
 const events = [
   {
     number: "01",
     title: "Mariages & Dotes",
+    titleLines: ["Mariages &", "Dotes"],
     description:
       "Une présence élégante pour donner du rythme aux temps forts, créer de l’émotion et faire de votre union un souvenir inoubliable.",
-    price: "À partir de 350 000 FCFA",
+    price: "À partir de 350.000 FCFA",
     className: "event-card--wedding",
+    image: "/mariage-dote.jpg",
   },
   {
     number: "02",
     title: "Cérémonies institutionnelles",
+    titleLines: ["Cérémonies", "institutionnelles"],
     description:
       "Une parfaite maîtrise du protocole, des prises de parole et des transitions pour porter l’image de votre institution.",
     price: "1 000 000 FCFA",
     className: "event-card--institution",
+    image: "/ceremonie-institutionnelle.jpg",
   },
   {
     number: "03",
     title: "Galas & événements d’entreprise",
+    titleLines: ["Galas & événements", "d’entreprise"],
     description:
       "Une animation précise et vivante qui valorise vos invités, vos messages et chaque séquence de votre programme.",
     price: "Sur devis",
     className: "event-card--gala",
+    image: "/gala-evenement-entreprise.jpg",
   },
   {
     number: "04",
     title: "Baptêmes & Anniversaires",
+    titleLines: ["Baptêmes &", "Anniversaires"],
     description:
       "Une ambiance chaleureuse, fluide et participative, pensée pour rassembler toutes les générations.",
-    price: "À partir de 250 000 FCFA",
+    price: "À partir de 250.000 FCFA",
     className: "event-card--celebration",
+    image: "/bapteme-anniversaire.jpg",
   },
 ];
 
 const pricing = [
-  { service: "Mariage & Dote", price: "350 000 — 400 000", note: "FCFA" },
+  { service: "Mariage & Dote", price: "350 000 — 400 000 FCFA" },
   {
     service: "Cérémonie institutionnelle",
-    price: "1 000 000",
-    note: "FCFA",
+    price: "1 000 000 FCFA",
   },
   {
     service: "Baptême & Anniversaire",
-    price: "250 000 — 300 000",
-    note: "FCFA",
+    price: "250 000 — 300 000 FCFA",
   },
 ];
 
@@ -65,17 +73,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <header className="site-header">
-        <a className="brand" href="#accueil" aria-label="Retour à l’accueil">
-          <span className="brand-mark">JM</span>
-          <span className="brand-name">Jean-Martial Azodjé</span>
-        </a>
-        <nav className="desktop-nav" aria-label="Navigation principale">
-          <a href="#apropos">À propos</a>
-          <a href="#evenements">Événements</a>
-          <a href="#tarifs">Tarifs</a>
-        </nav>
-      </header>
+      <SiteHeader homeHref="#accueil" />
 
       <section className="hero" id="accueil">
         <div className="hero-copy">
@@ -90,17 +88,11 @@ export default function Home() {
           <p className="hero-intro">
             Journaliste, présentateur TV et maître de cérémonie. Je donne du
             sens, du rythme et de l’émotion à chaque événement.
-          </p>
-          <div className="hero-actions">
-            <a
-              className="button button--copper"
-              href="https://wa.me/2250757988470?text=Bonjour%20Jean-Martial%2C%20je%20souhaite%20vous%20parler%20de%20mon%20%C3%A9v%C3%A9nement."
-              target="_blank"
-              rel="noreferrer"
-            >
-              Travaillons ensemble <span aria-hidden="true">→</span>
+            <br />
+            <a className="hero-learn-more" href="/a-propos">
+              Découvrir ma biographie
             </a>
-          </div>
+          </p>
         </div>
 
         <div className="hero-portrait">
@@ -114,85 +106,45 @@ export default function Home() {
             />
           </div>
           <div className="availability">
-            <span />
-            Disponible pour de nouveaux événements
+            <p>15 ans d’expérience</p>
+            <strong>Maître de cérémonie</strong>
           </div>
         </div>
 
-        <div className="hero-profile">
-          <p className="profile-kicker">15 ans d’expérience</p>
-          <h2>
-            Maître de
-            <br />
-            <span>cérémonie</span>
-          </h2>
-          <div className="profile-proof">
-            <div className="profile-dots" aria-hidden="true">
-              <i>JM</i>
-              <i>TV</i>
-              <i>MC</i>
-              <i>+15</i>
-            </div>
-            <p>
-              <strong>Des événements mémorables</strong>
-              <span>Mariages · Galas · Institutions</span>
-            </p>
-          </div>
-          <a className="profile-link" href="#evenements">
-            Voir mes prestations <span aria-hidden="true">↓</span>
-          </a>
-        </div>
       </section>
 
-      <section className="proof-strip" aria-label="Expertises">
-        <span>Mariages</span>
-        <i>✦</i>
-        <span>Protocoles</span>
-        <i>✦</i>
-        <span>Conférences</span>
-        <i>✦</i>
-        <span>Galas</span>
-        <i>✦</i>
-        <span>Événements d’entreprise</span>
-      </section>
-
-      <section className="about section-shell" id="apropos">
+      <section className="prestations-showcase section-shell" id="prestations">
         <div className="section-heading">
           <p className="eyebrow eyebrow--dark">
             <span />
-            À propos
+            Mes prestations
           </p>
           <p className="section-index">01 / 04</p>
         </div>
-        <div className="about-grid">
+        <div className="prestations-heading">
           <h2>
-            L’élégance du mot.
+            Chaque scène mérite
             <br />
-            La maîtrise du <em>moment.</em>
+            sa juste <em>émotion.</em>
           </h2>
-          <div className="about-copy">
-            <p className="about-lead">
-              Jean-Martial Azodjé est journaliste, présentateur TV et maître de
-              cérémonie.
-            </p>
-            <p>
-              Diplômé de l’École Supérieure de Journalisme de Lille, il cumule
-              plus de 15 années d’expérience dans les domaines de la
-              communication, des médias et de l’animation événementielle.
-            </p>
-            <p>
-              Reconnu pour son éloquence, son professionnalisme et sa maîtrise
-              du protocole, il captive son auditoire, valorise ses invités et
-              assure le bon déroulement de chaque programme.
-            </p>
-            <div className="about-quote">
-              <span aria-hidden="true">“</span>
-              <blockquote>
-                Donner du sens, du rythme et de l’émotion à chaque événement :
-                telle est ma signature.
-              </blockquote>
-            </div>
-          </div>
+        </div>
+        <div className="prestations-carousel" aria-label="Carousel des prestations">
+          {events.map((event) => (
+            <article
+              className="prestation-slide"
+              data-index={event.number}
+              key={event.title}
+            >
+              <span className="prestation-number">{event.number}</span>
+              <h3>
+                {event.titleLines.map((line) => (
+                  <span key={line}>{line}</span>
+                ))}
+              </h3>
+              <p>{event.description}</p>
+              <strong>{event.price}</strong>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -220,8 +172,14 @@ export default function Home() {
             {events.map((event) => (
               <article className={`event-card ${event.className}`} key={event.title}>
                 <div className="event-photo">
-                  <span>Photo événement</span>
-                  <small>à remplacer</small>
+                  {event.image ? (
+                    <img src={event.image} alt={`${event.title} animé par Jean-Martial Azodjé`} />
+                  ) : (
+                    <>
+                      <span>Photo événement</span>
+                      <small>à remplacer</small>
+                    </>
+                  )}
                 </div>
                 <div className="event-content">
                   <span className="event-number">{event.number}</span>
@@ -235,7 +193,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="method section-shell">
+      <section className="method section-shell" id="signature">
         <div className="section-heading">
           <p className="eyebrow eyebrow--dark">
             <span />
@@ -243,32 +201,39 @@ export default function Home() {
           </p>
           <p className="section-index">03 / 04</p>
         </div>
-        <div className="method-grid">
-          <h2>
-            Avant la scène,
-            <br />
-            tout se <em>prépare.</em>
-          </h2>
-          <ol className="method-list">
+        <div className="method-grid method-grid--signature">
+          <div className="signature-statement">
+            <p className="signature-kicker">Une méthode en trois temps</p>
+            <h2>
+              Donner du sens,
+              <br />
+              du rythme et de <em>l’émotion.</em>
+            </h2>
+            <p className="signature-lead">
+              Chaque prise de parole est pensée pour porter le moment, respecter
+              le protocole et créer une présence qui reste en mémoire.
+            </p>
+          </div>
+          <ol className="method-list signature-steps">
             <li>
               <span>01</span>
               <div>
-                <h3>Écoute & compréhension</h3>
-                <p>Vos objectifs, votre public, votre histoire et vos attentes.</p>
+                <h3>Comprendre l’intention</h3>
+                <p>Identifier le ton, les enjeux, le public et l’histoire de votre événement.</p>
               </div>
             </li>
             <li>
               <span>02</span>
               <div>
-                <h3>Préparation du conducteur</h3>
-                <p>Une trame fluide, des transitions précises et le bon tempo.</p>
+                <h3>Construire le rythme</h3>
+                <p>Préparer les transitions, les prises de parole et les respirations du programme.</p>
               </div>
             </li>
             <li>
               <span>03</span>
               <div>
-                <h3>Présence & émotion</h3>
-                <p>Le jour J, chaque séquence trouve naturellement sa place.</p>
+                <h3>Porter le moment</h3>
+                <p>Installer l’élégance, la fluidité et l’émotion juste le jour J.</p>
               </div>
             </li>
           </ol>
@@ -280,18 +245,16 @@ export default function Home() {
           <div className="section-heading section-heading--light">
             <p className="eyebrow">
               <span />
-              Prestations & tarifs
+              Mes Tarifs
             </p>
             <p className="section-index">04 / 04</p>
           </div>
           <div className="pricing-grid">
             <div>
               <h2>
-                Une présence
+                Une présence à la hauteur
                 <br />
-                à la hauteur de
-                <br />
-                votre <em>événement.</em>
+                de votre <em>événement.</em>
               </h2>
               <p className="pricing-note">
                 Les tarifs peuvent évoluer selon le lieu, la durée et le niveau
@@ -304,24 +267,15 @@ export default function Home() {
                   <h3>{item.service}</h3>
                   <p>
                     <strong>{item.price}</strong>
-                    <span>{item.note}</span>
                   </p>
                 </div>
               ))}
-              <a
-                className="button button--copper button--full"
-                href="https://wa.me/2250757988470?text=Bonjour%20Jean-Martial%2C%20je%20souhaite%20recevoir%20un%20devis."
-                target="_blank"
-                rel="noreferrer"
-              >
-                Demander un devis personnalisé <span aria-hidden="true">↗</span>
-              </a>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="contact">
+      <section className="contact" id="contact">
         <p className="eyebrow">
           <span />
           Disponible pour votre prochain événement
@@ -339,14 +293,6 @@ export default function Home() {
           <a href="tel:+2250757988470">+225 07 57 98 84 70</a>
           <a href="tel:+2250708115662">+225 07 08 11 56 62</a>
         </div>
-        <a
-          className="button button--light"
-          href="https://wa.me/2250757988470?text=Bonjour%20Jean-Martial%2C%20je%20souhaite%20vous%20parler%20de%20mon%20%C3%A9v%C3%A9nement."
-          target="_blank"
-          rel="noreferrer"
-        >
-          Démarrer la conversation <span aria-hidden="true">↗</span>
-        </a>
       </section>
 
       <footer>
