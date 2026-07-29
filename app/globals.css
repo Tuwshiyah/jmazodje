@@ -1077,10 +1077,10 @@ body {
   align-items: center;
   background: #fff;
   display: grid;
-  gap: 3.4vw;
+  gap: 3vw;
   grid-template-columns: 0.92fr 1.08fr 0.78fr;
-  min-height: 820px;
-  padding: 132px 4vw 58px;
+  min-height: 760px;
+  padding: 108px 4vw 42px;
 }
 
 .hero::before {
@@ -1164,7 +1164,8 @@ body {
   align-self: center;
   display: flex;
   flex-direction: column;
-  min-height: 650px;
+  min-height: 600px;
+  transform: translateY(-22px);
 }
 
 .portrait-placeholder {
@@ -1176,7 +1177,7 @@ body {
   border-radius: 28px;
   bottom: auto;
   flex: 1;
-  min-height: 570px;
+  min-height: 520px;
   padding: 18px;
   position: relative;
   right: auto;
@@ -1196,7 +1197,7 @@ body {
   display: block;
   height: 100%;
   object-fit: cover;
-  object-position: center 18%;
+  object-position: center 30%;
   position: relative;
   width: 100%;
   z-index: 1;
@@ -1509,7 +1510,7 @@ footer {
   .hero {
     display: flex;
     gap: 0;
-    padding: 108px 20px 58px;
+    padding: 88px 20px 46px;
   }
 
   .hero .eyebrow {
@@ -1534,17 +1535,18 @@ footer {
   }
 
   .hero-portrait {
-    margin-top: 38px;
-    min-height: 540px;
+    margin-top: 24px;
+    min-height: 485px;
+    transform: translateY(-14px);
   }
 
   .portrait-placeholder {
-    min-height: 470px;
+    min-height: 420px;
     width: 100%;
   }
 
   .portrait-photo {
-    object-position: center 14%;
+    object-position: center 26%;
   }
 
   .availability {
