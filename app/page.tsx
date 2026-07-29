@@ -107,12 +107,14 @@ export default function Home() {
         </div>
 
         <div className="hero-portrait">
-          <div className="portrait-placeholder" role="img" aria-label="Emplacement réservé au portrait de Jean-Martial Azodjé">
-            <span className="portrait-initials">JM</span>
-            <span className="portrait-label">
-              Votre portrait
-              <small>Photo à remplacer</small>
-            </span>
+          <div className="portrait-placeholder">
+            <img
+              className="portrait-photo"
+              src="/portrait-jean-martial.webp"
+              alt="Portrait de Jean-Martial Azodjé"
+              width="2078"
+              height="2472"
+            />
           </div>
           <div className="availability">
             <span />
