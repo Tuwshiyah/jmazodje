@@ -75,9 +75,6 @@ export default function Home() {
           <a href="#evenements">Événements</a>
           <a href="#tarifs">Tarifs</a>
         </nav>
-        <a className="header-cta" href="tel:+2250757988470">
-          Contactez-moi <span aria-hidden="true">→</span>
-        </a>
       </header>
 
       <section className="hero" id="accueil">

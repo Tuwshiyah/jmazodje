@@ -103,12 +103,6 @@ a:focus-visible {
   color: var(--ink);
 }
 
-.header-cta {
-  border-bottom: 1px solid var(--copper);
-  font-size: 13px;
-  padding-bottom: 4px;
-}
-
 .hero {
   background: var(--ivory);
   display: grid;
@@ -767,8 +761,7 @@ footer p {
     position: absolute;
   }
 
-  .brand-name,
-  .header-cta {
+  .brand-name {
     display: none;
   }
 
@@ -1046,31 +1039,6 @@ body {
   font-weight: 600;
   letter-spacing: 0;
   text-transform: none;
-}
-
-.header-cta {
-  align-items: center;
-  background: var(--ink);
-  border: 0;
-  border-radius: 999px;
-  color: #fff;
-  display: inline-flex;
-  font-size: 12px;
-  font-weight: 700;
-  gap: 13px;
-  padding: 7px 8px 7px 18px;
-}
-
-.header-cta span {
-  align-items: center;
-  background: var(--lime);
-  border-radius: 50%;
-  color: var(--ink);
-  display: inline-flex;
-  font-size: 18px;
-  height: 38px;
-  justify-content: center;
-  width: 38px;
 }
 
 .hero {
