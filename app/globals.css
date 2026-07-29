@@ -1103,7 +1103,7 @@ body {
 
 .hero h1 {
   font-family: var(--font-sans), Arial, sans-serif;
-  font-size: clamp(62px, 6.2vw, 112px);
+  font-size: clamp(50px, 4.9vw, 84px);
   font-weight: 800;
   letter-spacing: -0.085em;
   line-height: 0.82;
@@ -1506,7 +1506,7 @@ footer {
   }
 
   .hero h1 {
-    font-size: clamp(60px, 18vw, 82px);
+    font-size: clamp(48px, 14vw, 64px);
   }
 
   .hero-intro {
