@@ -1525,16 +1525,22 @@ footer {
   }
 
   .hero-profile {
+    align-self: stretch;
     display: block;
     margin-top: 52px;
+    text-align: left;
+    width: 100%;
   }
 
   .profile-kicker {
     margin-bottom: 26px;
+    max-width: none;
+    width: 100%;
   }
 
   .hero-profile h2 {
     font-size: 54px;
+    width: 100%;
   }
 
   .profile-proof {
