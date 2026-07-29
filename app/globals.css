@@ -1132,8 +1132,11 @@ body {
   align-self: center;
   display: flex;
   flex-direction: column;
-  min-height: 600px;
+  justify-self: center;
+  max-width: 500px;
+  min-height: 560px;
   transform: translateY(-22px);
+  width: 100%;
 }
 
 .portrait-placeholder {
@@ -1145,7 +1148,7 @@ body {
   border-radius: 28px;
   bottom: auto;
   flex: 1;
-  min-height: 520px;
+  min-height: 480px;
   padding: 18px;
   position: relative;
   right: auto;
@@ -1504,12 +1507,12 @@ footer {
 
   .hero-portrait {
     margin-top: 24px;
-    min-height: 485px;
+    min-height: 440px;
     transform: translateY(-14px);
   }
 
   .portrait-placeholder {
-    min-height: 420px;
+    min-height: 375px;
     width: 100%;
   }
 
