@@ -76,25 +76,23 @@ export default function Home() {
           <a href="#tarifs">Tarifs</a>
         </nav>
         <a className="header-cta" href="tel:+2250757988470">
-          Parlons de votre événement <span aria-hidden="true">↗</span>
+          Contactez-moi <span aria-hidden="true">→</span>
         </a>
       </header>
 
       <section className="hero" id="accueil">
         <div className="hero-copy">
           <p className="eyebrow">
-            <span />
-            Maître de cérémonie · Abidjan
+            Bonjour, je suis
           </p>
           <h1>
-            La voix de
+            Jean-Martial
             <br />
-            vos <em>grands</em>
-            <br />
-            moments.
+            <em>Azodjé</em>
           </h1>
           <p className="hero-intro">
-            Donner du sens, du rythme et de l’émotion à chaque événement.
+            Journaliste, présentateur TV et maître de cérémonie. Je donne du
+            sens, du rythme et de l’émotion à chaque événement.
           </p>
           <div className="hero-actions">
             <a
@@ -103,10 +101,7 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
             >
-              Écrire sur WhatsApp <span aria-hidden="true">↗</span>
-            </a>
-            <a className="text-link" href="#evenements">
-              Découvrir mon univers <span aria-hidden="true">↓</span>
+              Travaillons ensemble <span aria-hidden="true">→</span>
             </a>
           </div>
         </div>
@@ -116,17 +111,37 @@ export default function Home() {
             <span className="portrait-initials">JM</span>
             <span className="portrait-label">
               Votre portrait
-              <small>Remplacez cette image ici</small>
+              <small>Photo à remplacer</small>
             </span>
           </div>
-          <div className="experience-seal">
-            <strong>15+</strong>
-            <span>années d’expérience</span>
+          <div className="availability">
+            <span />
+            Disponible pour de nouveaux événements
           </div>
         </div>
 
-        <div className="hero-signature" aria-hidden="true">
-          Journaliste · Présentateur TV · MC
+        <div className="hero-profile">
+          <p className="profile-kicker">15 ans d’expérience</p>
+          <h2>
+            Maître de
+            <br />
+            <span>cérémonie</span>
+          </h2>
+          <div className="profile-proof">
+            <div className="profile-dots" aria-hidden="true">
+              <i>JM</i>
+              <i>TV</i>
+              <i>MC</i>
+              <i>+15</i>
+            </div>
+            <p>
+              <strong>Des événements mémorables</strong>
+              <span>Mariages · Galas · Institutions</span>
+            </p>
+          </div>
+          <a className="profile-link" href="#evenements">
+            Voir mes prestations <span aria-hidden="true">↓</span>
+          </a>
         </div>
       </section>
 
