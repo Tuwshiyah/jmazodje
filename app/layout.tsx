@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
     requestHeaders.get("x-forwarded-proto") ??
     (host?.includes("localhost") ? "http" : "https");
   const baseUrl = new URL(`${protocol}://${host ?? "localhost:3000"}`);
-  const socialImage = new URL("/og-nova.png", baseUrl).toString();
+  const socialImage = new URL("/site-primary-photo.jpg", baseUrl).toString();
 
   return {
     metadataBase: baseUrl,
@@ -36,6 +36,10 @@ export async function generateMetadata(): Promise<Metadata> {
       "animateur mariage",
       "Jean-Martial Azodjé",
     ],
+    icons: {
+      icon: [{ url: "/site-icon-192.png", sizes: "192x192", type: "image/png" }],
+      apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    },
     openGraph: {
       title: "Jean-Martial Azodjé | La voix de vos grands moments",
       description:

@@ -1,5 +1,11 @@
-const CACHE_NAME = "jean-martial-v3";
-const APP_SHELL = ["/", "/manifest.webmanifest", "/favicon.svg"];
+const CACHE_NAME = "jean-martial-v4";
+const APP_SHELL = [
+  "/",
+  "/manifest.webmanifest",
+  "/site-icon-192.png",
+  "/site-icon-512.png",
+  "/apple-touch-icon.png",
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));

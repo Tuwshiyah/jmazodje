@@ -12,8 +12,26 @@ test("builds the public Jean-Martial site", async () => {
   assert.match(html, /<html lang="fr">/i);
   assert.match(html, /<title>Jean-Martial Azodjé \| Maître de cérémonie<\/title>/i);
   assert.match(html, /<div id="root"><\/div>/i);
+  assert.match(html, /site-icon-192\.png/i);
+  assert.match(html, /apple-touch-icon\.png/i);
+  assert.match(html, /site-primary-photo\.jpg/i);
   assert.ok(assets.some((file) => file.endsWith(".js")));
   assert.ok(assets.some((file) => file.endsWith(".css")));
+});
+
+test("uses the first biography portrait for mobile installation", async () => {
+  const [manifest, serviceWorker, publicFiles] = await Promise.all([
+    readFile(new URL("../public/manifest.webmanifest", import.meta.url), "utf8"),
+    readFile(new URL("../public/sw.js", import.meta.url), "utf8"),
+    readdir(new URL("../public/", import.meta.url)),
+  ]);
+
+  assert.match(manifest, /site-icon-192\.png/);
+  assert.match(manifest, /site-icon-512\.png/);
+  assert.match(manifest, /any maskable/);
+  assert.match(serviceWorker, /jean-martial-v4/);
+  assert.ok(publicFiles.includes("apple-touch-icon.png"));
+  assert.ok(publicFiles.includes("site-primary-photo.jpg"));
 });
 
 test("connects prestation illustrations to the dashboard and public cards", async () => {
@@ -68,7 +86,7 @@ test("keeps dashboard image replacements safe during concurrent edits", async ()
   assert.match(app, /function PublicSite/);
   assert.doesNotMatch(app, /export default function App\(\) \{\s+const \{ content \} = useSiteContent/);
   assert.match(siteContent, /1786761413395-whatsapp-image/);
-  assert.match(serviceWorker, /jean-martial-v3/);
+  assert.match(serviceWorker, /jean-martial-v4/);
   assert.match(firebaseConfig, /"source": "\/sw\.js"/);
   assert.match(dashboard, /Remplacer l’image/);
   assert.match(dashboard, /L’image précédente est conservée/);
