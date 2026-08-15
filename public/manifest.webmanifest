@@ -1,0 +1,17 @@
+{
+  "name": "Jean-Martial Azodjé",
+  "short_name": "Jean-Martial",
+  "description": "Journaliste, présentateur TV et maître de cérémonie.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#b6a481",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

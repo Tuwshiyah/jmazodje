@@ -1,0 +1,36 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.uid == 'JD4zZi1Mb2P3ByJ8C3WVNiZi1Dh1';
+    }
+
+    match /siteContent/current {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /quoteRequests/{requestId} {
+      allow create: if request.resource.data.keys().hasOnly([
+          'name', 'phone', 'service', 'date', 'message', 'status', 'createdAt'
+        ])
+        && request.resource.data['name'] is string
+        && request.resource.data['name'].size() > 1
+        && request.resource.data['name'].size() <= 120
+        && request.resource.data['phone'] is string
+        && request.resource.data['phone'].size() > 5
+        && request.resource.data['phone'].size() <= 40
+        && request.resource.data['service'] is string
+        && request.resource.data['service'].size() <= 160
+        && request.resource.data['date'] is string
+        && request.resource.data['date'].size() <= 20
+        && request.resource.data['message'] is string
+        && request.resource.data['message'].size() <= 2000
+        && request.resource.data['status'] == 'new'
+        && request.resource.data['createdAt'] == request.time;
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}

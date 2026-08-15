@@ -1,91 +1,84 @@
 import assert from "node:assert/strict";
-import { access, readFile, readdir } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
-const developmentPreviewMeta =
-  /<meta(?=[^>]*\bname=["']codex-preview["'])(?=[^>]*\bcontent=["']development["'])[^>]*>/i;
-const templateRoot = new URL("../", import.meta.url);
-const previewRoot = new URL("../app/_sites-preview/", import.meta.url);
-
-async function render() {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
-
-  return worker.fetch(
-    new Request("http://localhost/", {
-      headers: { accept: "text/html" },
-    }),
-    {
-      ASSETS: {
-        fetch: async () => new Response("Not found", { status: 404 }),
-      },
-    },
-    {
-      waitUntil() {},
-      passThroughOnException() {},
-    },
+test("builds the public Jean-Martial site", async () => {
+  const html = await readFile(
+    new URL("../dist/index.html", import.meta.url),
+    "utf8",
   );
-}
+  const assets = await readdir(new URL("../dist/assets/", import.meta.url));
 
-test("server-renders the starter loading skeleton", async () => {
-  const response = await render();
-  assert.equal(response.status, 200);
-  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
-
-  const html = await response.text();
-  assert.match(html, developmentPreviewMeta);
-  assert.match(html, /<title>Your site is taking shape<\/title>/i);
-  assert.match(html, /Building your site/);
-  assert.match(html, /Your site is taking shape/);
-  assert.match(
-    html,
-    /Your first version will appear here automatically when it’s ready\./,
-  );
-  assert.doesNotMatch(html, /Codex/);
-  assert.match(html, /react-loading-skeleton/);
-  assert.match(html, /role="status"/);
+  assert.match(html, /<html lang="fr">/i);
+  assert.match(html, /<title>Jean-Martial Azodjé \| Maître de cérémonie<\/title>/i);
+  assert.match(html, /<div id="root"><\/div>/i);
+  assert.ok(assets.some((file) => file.endsWith(".js")));
+  assert.ok(assets.some((file) => file.endsWith(".css")));
 });
 
-test("keeps the loading skeleton scoped and disposable", async () => {
-  const [preview, css, page, layout, packageJson, files] = await Promise.all([
-    readFile(new URL("SkeletonPreview.tsx", previewRoot), "utf8"),
-    readFile(new URL("preview.css", previewRoot), "utf8"),
-    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../package.json", import.meta.url), "utf8"),
-    readdir(previewRoot),
+test("connects prestation illustrations to the dashboard and public cards", async () => {
+  const [app, dashboard, firebaseClient, storageRules] = await Promise.all([
+    readFile(new URL("../src/App.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../src/Dashboard.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../src/firebaseClient.ts", import.meta.url), "utf8"),
+    readFile(new URL("../storage.rules", import.meta.url), "utf8"),
   ]);
 
-  assert.deepEqual(files.sort(), ["SkeletonPreview.tsx", "preview.css"]);
-  assert.match(preview, /from "react-loading-skeleton"/);
-  assert.match(preview, /baseColor="#eceae7"/);
-  assert.match(preview, /highlightColor="#f9f8f6"/);
-  assert.match(preview, /duration=\{2\.8\}/);
-  assert.match(preview, /sites-skeleton-search-placeholder/);
-  assert.match(packageJson, /"react-loading-skeleton": "3\.5\.0"/);
+  assert.match(app, /className="prestation-illustration"/);
+  assert.match(app, /src=\{prestation\.image\}/);
+  assert.match(dashboard, /label="Illustration de la carte"/);
+  assert.match(dashboard, /accept="image\/\*,\.heic,\.heif"/);
+  assert.match(firebaseClient, /uploadDashboardImage/);
+  assert.match(firebaseClient, /uploadBytes/);
+  assert.match(firebaseClient, /contentType: "image\/jpeg"/);
+  assert.match(firebaseClient, /site-images\/\$\{Date\.now\(\)\}/);
+  assert.match(storageRules, /request\.resource\.contentType\.matches\('image\/\.\*'\)/);
+});
 
-  const shellIndex = preview.indexOf('className="sites-skeleton-shell"');
-  const statusIndex = preview.indexOf('className="sites-skeleton-status"');
-  assert.ok(shellIndex >= 0 && statusIndex > shellIndex);
-  assert.match(css, /position:\s*fixed/);
-  assert.match(css, /inset:\s*0/);
-  assert.match(css, /opacity:\s*0\.52/);
-  assert.match(css, /prefers-reduced-motion:\s*reduce/);
-  assert.doesNotMatch(css, /#020617|canvas|pets|progress/i);
-  assert.doesNotMatch(
-    preview,
-    /loading-spinner|status-mark|status-progress|canvas|cookie|random/i,
-  );
+test("gives each dashboard section its own route and exposes TikTok in the header", async () => {
+  const [app, dashboard, header] = await Promise.all([
+    readFile(new URL("../src/App.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../src/Dashboard.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/SiteHeader.tsx", import.meta.url), "utf8"),
+  ]);
 
-  assert.match(page, /export const metadata:\s*Metadata/);
-  assert.match(page, /"codex-preview": "development"/);
-  assert.match(page, /<SkeletonPreview \/>/);
-  assert.match(layout, /title:\s*"Starter Project"/);
-  assert.doesNotMatch(layout, /codex-preview|_sites-preview|themeColor|\bViewport\b/);
-  assert.doesNotMatch(css, /(^|\s)(html|body)\s*\{/m);
+  assert.match(app, /path\.startsWith\("\/dashboard\/"\)/);
+  assert.match(dashboard, /href="\/dashboard\/prestations"/);
+  assert.match(dashboard, /href="\/dashboard\/formulaire"/);
+  assert.match(dashboard, /data-dashboard-section=\{activeDashboardSection\}/);
+  assert.match(header, /tiktok\.com\/@jeanmartialazodje/);
+  assert.match(header, /aria-label="TikTok de Jean-Martial Azodjé"/);
+});
 
-  await assert.rejects(
-    access(new URL("public/_sites-preview", templateRoot)),
-  );
+test("keeps dashboard image replacements safe during concurrent edits", async () => {
+  const [app, dashboard, contentHook, siteContent, serviceWorker, firebaseConfig] = await Promise.all([
+    readFile(new URL("../src/App.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../src/Dashboard.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../src/useSiteContent.ts", import.meta.url), "utf8"),
+    readFile(new URL("../src/siteContent.ts", import.meta.url), "utf8"),
+    readFile(new URL("../public/sw.js", import.meta.url), "utf8"),
+    readFile(new URL("../firebase.json", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(contentHook, /writeQueueRef/);
+  assert.match(contentHook, /typeof update === "function"/);
+  assert.match(contentHook, /preserveLocalContentRef/);
+  assert.match(contentHook, /getDocFromServer/);
+  assert.match(contentHook, /version en ligne ne correspond pas/);
+  assert.match(app, /function PublicSite/);
+  assert.doesNotMatch(app, /export default function App\(\) \{\s+const \{ content \} = useSiteContent/);
+  assert.match(siteContent, /1786761413395-whatsapp-image/);
+  assert.match(serviceWorker, /jean-martial-v3/);
+  assert.match(firebaseConfig, /"source": "\/sw\.js"/);
+  assert.match(dashboard, /Remplacer l’image/);
+  assert.match(dashboard, /L’image précédente est conservée/);
+  assert.match(dashboard, /Supprimer cette image du site \?/);
+  assert.match(dashboard, /updateGalleryItem\(activePrestation\.id, item\.id/);
+  assert.match(dashboard, /pendingPreview/);
+  assert.match(dashboard, /25 Mo maximum/);
+});
+
+test("uses the WhatsApp green for the mobile action", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  assert.match(css, /\.mobile-actions a:last-child\s*\{\s*background:\s*#25d366;/i);
 });

@@ -5,9 +5,7 @@ import { useState } from "react";
 const menuLinks = [
   { label: "Ma biographie", href: "/a-propos" },
   { label: "Mes prestations", href: "/#prestations" },
-  { label: "Événements animés", href: "/#evenements" },
-  { label: "Ma signature", href: "/#signature" },
-  { label: "Prestation et tarifs", href: "/#tarifs" },
+  { label: "Tarifs", href: "/#tarifs" },
   { label: "Me contacter", href: "/#contact" },
 ];
 
@@ -41,8 +39,8 @@ export default function SiteHeader({
       </a>
       <nav className="desktop-nav" aria-label="Navigation principale">
         <a href="/a-propos">À propos</a>
-        <a href="/#evenements">Événements</a>
         <a href="/#tarifs">Tarifs</a>
+        <a href="/dashboard">Dashboard</a>
       </nav>
       <div className="header-actions">
         <a
@@ -63,11 +61,28 @@ export default function SiteHeader({
           <span aria-hidden="true">f</span>
         </a>
         <a
+          className="header-icon header-icon--tiktok"
+          href="https://www.tiktok.com/@jeanmartialazodje?_r=1&_t=ZS-98rN8zROgq2"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="TikTok de Jean-Martial Azodjé"
+          title="TikTok"
+        >
+          <span aria-hidden="true">♪</span>
+        </a>
+        <a
           className="header-icon"
           href="tel:+2250757988470"
           aria-label="Appeler Jean-Martial Azodjé"
         >
-          <span aria-hidden="true">☎</span>
+          <svg
+            aria-hidden="true"
+            className="header-icon__svg"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path d="M6.6 2.8 9 2.2l2.1 5-1.6 1.2c1 2.1 2.6 3.8 4.7 4.9l1.3-1.6 5 2.2-.5 2.4c-.3 1.4-1.7 2.3-3.1 2a18 18 0 0 1-11-7.2A17.7 17.7 0 0 1 4.5 5.9c-.3-1.4.7-2.8 2.1-3.1Z" />
+          </svg>
         </a>
       </div>
 
